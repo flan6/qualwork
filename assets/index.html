@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <script src="https://unpkg.com/htmx.org"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <h1>Hello, World!</h1>
+    <!-- Example HTMX usage -->
+    <div hx-get="/hello" hx-trigger="load" hx-swap="outerHTML" class="dynamic-content">
+        Loading...
+    </div>
+</body>
+
+</html>
