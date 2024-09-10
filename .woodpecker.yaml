@@ -1,7 +1,7 @@
 steps:
     - name: build
-      image: golang
+      image: golang:latest
       commands:
           - go get
-          - go build
-          - go test
+          - go build -o main .
+          - docker build -t qualwork:latest -f build/Dockerfile .

@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Courier New", monospace;
+  margin: 20px;
+  padding: 20px;
+  background-color: #272727;
+}
+
+* {
+  border: 1px solid green;
+}

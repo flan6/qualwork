@@ -2,15 +2,16 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"log/slog"
 	"net/http"
 	"strings"
-	"text/template"
-	"time"
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	r := http.NewServeMux()
+
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		tp := template.Must(template.ParseFiles("assets/index.html"))
 
 		if err := tp.Execute(w, nil); err != nil {
@@ -18,26 +19,23 @@ func main() {
 		}
 	})
 
-	http.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
-		time.Sleep(time.Second * 3)
+	r.HandleFunc("/contact", func(w http.ResponseWriter, r *http.Request) {
+		tp := template.Must(template.ParseFiles("assets/contact.html"))
 
-		tp := template.Must(template.ParseFiles("assets/hello.html"))
-
-		err := tp.Execute(w, map[string]string{
-			"Message": "This is a dynamic message from Go!",
-		})
+		err := tp.Execute(w, nil)
 		if err != nil {
-			slog.Error(fmt.Errorf("failed to execute hello.html: %w", err).Error())
+			slog.Error(fmt.Errorf("failed to execute contact.html: %w", err).Error())
 		}
 	})
 
 	fs := http.FileServer(http.Dir("static"))
-	http.Handle("/static/", http.StripPrefix("/static/", setContentTypeMiddleware(fs)))
+
+	r.Handle("/static/", http.StripPrefix("/static/", setContentTypeMiddleware(fs)))
 
 	slog.Info("server listening on port 8080")
 
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		slog.Error(fmt.Errorf("failed to init server: %w", err).Error())
+	if err := http.ListenAndServe(":8080", r); err != nil {
+		slog.Error(fmt.Errorf("shuting down server: %w", err).Error())
 	}
 }
 
