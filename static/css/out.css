@@ -611,6 +611,10 @@ video {
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.rounded {
+  border-radius: 0.25rem;
+}
+
 .object-center {
   -o-object-position: center;
      object-position: center;
@@ -622,6 +626,11 @@ video {
 
 .font-bold {
   font-weight: 700;
+}
+
+.text-amber-400 {
+  --tw-text-opacity: 1;
+  color: rgb(251 191 36 / var(--tw-text-opacity));
 }
 
 .text-gray-400 {
@@ -646,19 +655,7 @@ body {
   background-color: #272727;
 }
 
-a {
-  color: #fcfbfb;
-}
-
-nav {
-  margin: auto;
-  color: white;
-}
-
-img {
-  margin: 0 auto;
-}
-
-* {
-  border: 1px solid green;
+.hover\:bg-black:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
